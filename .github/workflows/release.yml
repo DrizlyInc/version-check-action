@@ -16,10 +16,10 @@ jobs:
         id: parse-version
         run: echo "::set-output name=version::$(cat action.yml | tail -1 | cut -d ':' -f4)"
 
-      - uses: DrizlyInc/version-check-action@v0.0.0
-        id: check-version
-        with:
-          version: ${{ steps.parse-version.outputs.version }}
+      # - uses: DrizlyInc/version-check-action@v0.0.0
+      #   id: check-version
+      #   with:
+      #     version: ${{ steps.parse-version.outputs.version }}
 
       - name: Build and Publish Image
         if: ${{ steps.check-version.outputs.new-version == 'true' }}
@@ -29,11 +29,11 @@ jobs:
           containerRegistry: true
           tag: |
             latest
-            ${{ steps.parse-version.outputs.version }}
+            v0.0.1
             ${{ github.sha }}
 
       - name: Release
         if: ${{ steps.check-version.outputs.new-version == 'true' }}
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.parse-version.outputs.version }}
+          tag_name: v0.0.1
