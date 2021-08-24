@@ -22,7 +22,7 @@ jobs:
       #     version: ${{ steps.parse-version.outputs.version }}
 
       - name: Build and Publish Image
-        if: ${{ steps.check-version.outputs.new-version == 'true' }}
+        # if: ${{ steps.check-version.outputs.new-version == 'true' }}
         uses: matootie/github-docker@v3.1.0
         with:
           accessToken: ${{ github.token }}
@@ -33,7 +33,7 @@ jobs:
             ${{ github.sha }}
 
       - name: Release
-        if: ${{ steps.check-version.outputs.new-version == 'true' }}
+        # if: ${{ steps.check-version.outputs.new-version == 'true' }}
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v0.0.1
