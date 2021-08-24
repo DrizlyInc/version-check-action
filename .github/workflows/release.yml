@@ -1,0 +1,39 @@
+name: Release
+
+on: push
+
+jobs:
+
+  release:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Parse Version From action.yml
+        id: parse-version
+        run: echo "::set-output name=version::$(cat action.yml | tail -1 | cut -d ':' -f4)"
+
+      - uses: DrizlyInc/version-check-action@v0.0.0
+        id: check-version
+        with:
+          version: ${{ steps.parse-version.outputs.version }}
+
+      - name: Build and Publish Image
+        if: ${{ steps.check-version.outputs.new-version == 'true' }}
+        uses: matootie/github-docker@v3.1.0
+        with:
+          accessToken: ${{ github.token }}
+          containerRegistry: true
+          tag: |
+            latest
+            ${{ steps.parse-version.outputs.version }}
+            ${{ github.sha }}
+
+      - name: Release
+        if: ${{ steps.check-version.outputs.new-version == 'true' }}
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.parse-version.outputs.version }}
