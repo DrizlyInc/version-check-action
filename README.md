@@ -6,7 +6,7 @@ order to determine if a new release should be created.
 # Usage
 
 ```yaml
-- uses: DrizlyInc/version-check-action@v0.2.0
+- uses: DrizlyInc/version-check-action@v0.3.0
   id: check-version
   with:
 

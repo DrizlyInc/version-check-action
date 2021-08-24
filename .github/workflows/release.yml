@@ -22,6 +22,8 @@ jobs:
         id: check-version
         with:
           version: ${{ steps.parse-version.outputs.version }}
+          username: ${{ github.actor }}
+          token: ${{ github.token }}
 
 
   release:
