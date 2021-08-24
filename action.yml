@@ -21,4 +21,4 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/drizlyinc/version-check-action:v0.0.1
+  image: docker://ghcr.io/drizlyinc/version-check-action:v0.1.0
