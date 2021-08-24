@@ -18,7 +18,7 @@ jobs:
         id: parse-version
         run: echo "::set-output name=version::$(cat action.yml | tail -1 | cut -d ':' -f4)"
 
-      - uses: DrizlyInc/version-check-action@v0.1.0
+      - uses: DrizlyInc/version-check-action@v0.2.0
         id: check-version
         with:
           version: ${{ steps.parse-version.outputs.version }}

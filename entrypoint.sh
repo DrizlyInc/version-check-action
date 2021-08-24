@@ -5,6 +5,8 @@ set -e
 function check_version {
   VERSION=$1
   echo "Checking version: $VERSION"
+  echo "::set-output name=version::${VERSION}"
+
   ! curl -s -u ${INPUT_USERNAME}:${INPUT_TOKEN} ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/matching-refs/tags/${INPUT_VERSION} | jq -e --arg VERSION "$VERSION" '.[] | select(.ref | endswith($VERSION))'
 
   if [ $? -eq 0 ]; then

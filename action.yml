@@ -27,6 +27,9 @@ outputs:
   new-version:
     description: "'true' if the given version does not exist as a tag, otherwise 'false'"
 
+  version:
+    description: "The version that was checked, either from input or from reading the version_file"
+
 runs:
   using: docker
-  image: docker://ghcr.io/drizlyinc/version-check-action:v0.2.0
+  image: docker://ghcr.io/drizlyinc/version-check-action:v0.3.0
