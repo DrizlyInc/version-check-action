@@ -1,6 +1,6 @@
 # Version Check Action
 
-This action checks a given version against the tags currently existing on the repository in
+This action uses the GitHub API to check a given version against the tags currently existing on the repository in
 order to determine if a new release should be created.
 
 # Usage
@@ -16,6 +16,9 @@ order to determine if a new release should be created.
     # Can be provided in place of `version`, path to a file containing
     # the version which should be checked
     version_file: ./version
+
+    username: ${{ github.actor }}
+    token: ${{ github.token }}
 
 - name: Release
   if: ${{ steps.check-version.outputs.new-version == 'true' }}

@@ -5,7 +5,7 @@ set -e
 function check_version {
   VERSION=$1
   echo "Checking version: $VERSION"
-  ! curl -s ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/matching-refs/tags | jq -e --arg VERSION "$VERSION" '.[] | select(.ref | endswith($VERSION))'
+  ! curl -s -u ${INPUT_USERNAME}:${INPUT_TOKEN} ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/matching-refs/tags/${INPUT_VERSION} | jq -e --arg VERSION "$VERSION" '.[] | select(.ref | endswith($VERSION))'
 
   if [ $? -eq 0 ]; then
     echo "Version $VERSION is new!"
@@ -16,6 +16,15 @@ function check_version {
   fi
 }
 
+if [ -z "${INPUT_USERNAME}" ]; then
+  echo "input 'username' is required"
+  exit 1
+fi
+
+if [ -z "${INPUT_TOKEN}" ]; then
+  echo "input 'token' is required"
+  exit 1
+fi
 
 if [ ! -z "${INPUT_VERSION}" ]; then
   check_version $INPUT_VERSION
