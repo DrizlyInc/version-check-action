@@ -12,10 +12,12 @@ inputs:
   version_file:
     required: false
     description: Path to a file containg the version to check
+    default: ''
 
 outputs:
+
   new-version:
-    description: 'true' if the given version does not exist as a tag, otherwise 'false'
+    description: "'true' if the given version does not exist as a tag, otherwise 'false'"
 
 runs:
   using: docker
