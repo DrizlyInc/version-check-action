@@ -14,6 +14,14 @@ inputs:
     description: Path to a file containg the version to check
     default: ''
 
+  username:
+    required: true
+    description: Username for authenticating to GitHub API (github.actor)
+
+  token:
+    required: true
+    description: Token for authenticating to GitHub API (github.token)
+
 outputs:
 
   new-version:
@@ -21,4 +29,4 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/drizlyinc/version-check-action:v0.1.0
+  image: docker://ghcr.io/drizlyinc/version-check-action:v0.2.0
