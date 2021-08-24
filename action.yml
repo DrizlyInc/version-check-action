@@ -29,5 +29,4 @@ outputs:
 
 runs:
   using: docker
-  image: Dockerfile
-  # image: docker://ghcr.io/drizlyinc/version-check-action:v0.1.0
+  image: docker://ghcr.io/drizlyinc/version-check-action:v0.2.0
