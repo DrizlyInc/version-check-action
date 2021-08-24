@@ -1,0 +1,22 @@
+name: Version Check
+description: Checks whether or not the provided version already exists as a tag on the repository
+author: DrizlyInc/DVX
+
+inputs:
+
+  version:
+    required: false
+    description: The version to check
+    default: ''
+
+  version_file:
+    required: false
+    description: Path to a file containg the version to check
+
+outputs:
+  new-version:
+    description: 'true' if the given version does not exist as a tag, otherwise 'false'
+
+runs:
+  using: docker
+  image: docker://ghcr.io/drizlyinc/version-check-action:v0.0.0

@@ -1,0 +1,27 @@
+name: Validate & Release
+
+on: push
+
+jobs:
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and Publish Image
+        uses: matootie/github-docker@v3.1.0
+        with:
+          accessToken: ${{ github.token }}
+          containerRegistry: true
+          tag: |
+            latest
+            v0.0.0
+            ${{ github.sha }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v0.0.0
