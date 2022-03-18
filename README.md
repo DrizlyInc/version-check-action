@@ -1,3 +1,5 @@
+> :warning: **THIS REPOSITORY IS NOT BEING ACTIVELY  MAINTAINED**
+
 # Version Check Action
 
 This action uses the GitHub API to check a given version against the tags currently existing on the repository in
